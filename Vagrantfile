@@ -3,8 +3,8 @@
 
 Vagrant.configure("2") do |config|
     config.ssh.insert_key = false
-    config.vm.synced_folder '.', '/shared', type: 'nfs'
-    config.vm.network "private_network", type: "dhcp"
+    #config.vm.synced_folder '.', '/shared', type: 'nfs'
+    #config.vm.network "private_network", type: "dhcp"
   
     # VirtualBox.
     config.vm.define "virtualbox" do |virtualbox|
@@ -13,14 +13,13 @@ Vagrant.configure("2") do |config|
 
   
       config.vm.provider :virtualbox do |v|
-        v.gui = false
+        v.gui = true
         v.memory = 1024
         v.cpus = 1
         v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
         v.customize ["modifyvm", :id, "--ioapic", "on"]
       end
   
-      config.vm.provision "shell", inline: "echo Hello, World"
     end
   
   end
